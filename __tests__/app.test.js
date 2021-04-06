@@ -8,19 +8,6 @@ describe('07-build-something routes', () => {
     return setup(pool);
   });
 
-  // it('creates a new favorite in our database', () => {
-  //   return request(app)
-  //     .post('/api/v1/favorites')
-  //     .send({ type: 'coffee', options: `Jim & Patty's` })
-  //     .then((res) => {
-  //       expect(res.body).toEqual({
-  //         id: '1',
-  //         type: 'coffee',
-  //         options: `Jim & Patty's`
-  //       });
-  //     });
-  // });
-
   it('creates a new favorite in our database', async () => {
     const res = await request(app)
       .post('/api/v1/favorites')
@@ -92,18 +79,19 @@ describe('07-build-something routes', () => {
       });
   });
 
-  // it('deletes order with id in our database and sends a text message', async () => {
-  //   const res = await request(app)
-  //     .post('/api/v1/orders')
-  //     .send({ quantity: 35 });
+  it('deletes favorite with id in our database', async () => {
+    const res = await request(app)
+      .post('/api/v1/favorites')
+      .send({ type: 'coffee', options: `Jim & Patty's` });
 
-  //   const secondRes = await request(app)
-  //     .delete('/api/v1/orders/1')
+    const secondRes = await request(app)
+      .delete('/api/v1/favorites/1')
 
-  //   expect(secondRes.body).toEqual(
-  //     {
-  //       id: '1',
-  //       quantity: 35,
-  //     });
-  // });
+    expect(secondRes.body).toEqual(
+      {
+        id: '1',
+        type: 'coffee',
+        options: `Jim & Patty's`
+      });
+  });
 });
