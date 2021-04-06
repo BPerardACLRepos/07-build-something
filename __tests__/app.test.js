@@ -75,21 +75,22 @@ describe('07-build-something routes', () => {
       });
   });
 
-  // it('updates order with id in our database and sends a text message', async () => {
-  //   const res = await request(app)
-  //     .post('/api/v1/orders')
-  //     .send({ quantity: 23 });
+  it('updates favorite with id in our database', async () => {
+    const res = await request(app)
+      .post('/api/v1/favorites')
+      .send({ type: 'coffee', options: `Jim & Patty's` });
 
-  //   const secondRes = await request(app)
-  //     .put('/api/v1/orders/1')
-  //     .send({ quantity: 7 });
+    const secondRes = await request(app)
+      .put('/api/v1/favorites/1')
+      .send({ type: 'coffee', options: `Jim & Patty's, Plaid Pantry` });
 
-  //   expect(secondRes.body).toEqual(
-  //     {
-  //       id: '1',
-  //       quantity: 7,
-  //     });
-  // });
+    expect(secondRes.body).toEqual(
+      {
+        id: '1',
+        type: 'coffee',
+        options: `Jim & Patty's, Plaid Pantry`
+      });
+  });
 
   // it('deletes order with id in our database and sends a text message', async () => {
   //   const res = await request(app)
