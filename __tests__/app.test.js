@@ -33,29 +33,31 @@ describe('07-build-something routes', () => {
     });
   });
 
-  // it('gets all orders in our database', async () => {
-  //   const res = await request(app)
-  //     .post('/api/v1/orders')
-  //     .send({ quantity: 10 });
+  it('gets all favorites in our database', async () => {
+    const res = await request(app)
+      .post('/api/v1/favorites')
+      .send({ type: 'coffee', options: `Jim & Patty's` });
 
-  //   const secondRes = await request(app)
-  //     .post('/api/v1/orders')
-  //     .send({ quantity: 33 });
+    const secondRes = await request(app)
+      .post('/api/v1/favorites')
+      .send({ type: 'karaoke', options: `Chopsticks II` });
 
-  //   const thirdRes = await request(app)
-  //     .get('/api/v1/orders');
+    const thirdRes = await request(app)
+      .get('/api/v1/favorites');
 
-  //   expect(thirdRes.body).toEqual([
-  //     {
-  //       id: '1',
-  //       quantity: 10,
-  //     },
-  //     {
-  //       id: '2',
-  //       quantity: 33,
-  //     },
-  //   ]);
-  // });
+    expect(thirdRes.body).toEqual([
+      {
+        id: '1',
+        type: 'coffee',
+        options: `Jim & Patty's`
+      },
+      {
+        id: '2',
+        type: 'karaoke',
+        options: `Chopsticks II`
+      },
+    ]);
+  });
 
   // it('gets order with id in our database', async () => {
   //   const res = await request(app)
